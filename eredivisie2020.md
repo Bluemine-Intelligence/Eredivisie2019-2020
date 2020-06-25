@@ -99,7 +99,7 @@ $$
 \end{aligned}
 $$
 
-We kunnen hieruit dus opmaken dat de beste schatting voor de het aanvallend vermogen van een team het totaal aantal doelpunten gedeeld door het verdedigend vermogen van de tegenstander is. Dit zorgt er voor dat doelpunten tegen een slechtere tegenstander de score minder verhogen dan doelpunten tegen een tegenstander die juist erg goed kan verdedigen.
+We kunnen hieruit dus opmaken dat de beste schatting voor het aanvallend vermogen van een team het totaal aantal doelpunten gedeeld door het verdedigend vermogen van de tegenstander is. Dit zorgt er voor dat doelpunten tegen een slechtere tegenstander de score minder verhogen dan doelpunten tegen een tegenstander die juist erg goed kan verdedigen.
 
 Iets vergelijkbaars geldt voor het verdedigend vermogen:
 
@@ -228,9 +228,9 @@ uitslag.sort_values(by=['Punten', 'Doelsaldo'], ascending=False).rename_axis(Non
 
 We zien hier inderdaad dat Ajax en AFC toch respectievelijk gemiddeld 0.71 en 2.04 wedstrijden zouden verliezen. Waardoor zowel het verwachte aantal punten en doelsaldo voor Ajax overtuigend hoger is. Merk ook op dat Heracles en Heerenveen nu van positie zijn verwisseld, wat aantoont dat er toch echt een wezenlijk verschil is tussen de twee methoden. In zekere zin lijkt het eerlijker om uit te gaan van gemiddelden dan 1 enkele uitslag per wedstrijd (ook al is het de meest waarschijnlijke uitslag). 
 
-Toch is het niet helemaal terecht om op basis van de gemiddelde te concluderen wie er waarschijnlijk had gewonnen[^dice], om dat te concluderen zullen we toch echte de kans moeten uitrekenen dat Ajax had gewonnen, en een hoger gemiddelde bied geen garantie dat Ajax een grotere kans heeft om hoger te eindigen. Dit is het makkelijkst te bepalen door simpelweg de rest van de competitie te simuleren (een zogeheten monte carlo algoritme), en op basis daarvan te bepalen hoe waarschijnlijk elke positie is per team:
+Toch is het ook niet helemaal terecht om op basis van de gemiddelden te concluderen dat Ajax waarschijnlijk had gewonnen, om dat te concluderen zullen we toch echt de kans moeten uitrekenen dat Ajax had gewonnen, en een hoger gemiddelde bied geen garantie dat Ajax een grotere kans heeft om hoger te eindigen[^dice]. Deze kans is het makkelijkst te bepalen door simpelweg de rest van de competitie te simuleren (een zogeheten monte carlo algoritme), en op basis daarvan te bepalen hoe waarschijnlijk elke positie is per team:
 
-[^dice]: Denk bijvoorbeeld aan 2 dobbelstenen waarbij op de eerste de normale 1 t/m 6 staat en de tweede vijf keer een 1 heeft staan en 1 keer een 100. De tweede heeft een hoger gemiddelde maar als je ze beide rolt rolt de eerste meestal hoger.
+[^dice]: Denk bijvoorbeeld aan twee dobbelstenen waarbij op de eerste de normale 1 t/m 6 staat en de tweede vijf keer een 1 heeft staan en 1 keer een 100. De tweede heeft een hoger gemiddelde maar als je ze beide rolt rolt de eerste meestal hoger.
 
 ```python
 volgorde = uitslag.sort_values(by=['Punten', 'Doelsaldo'], ascending=False).index # Onthoud (logische) volgorde
@@ -257,8 +257,8 @@ positie = positie.unstack().loc[volgorde]
 positie.rename_axis(None).style.background_gradient(cmap='Blues').format("{:.1f}%")
 ```
 
-Zo op het eertse gezicht lijken de maxima op dezelfde te plek liggen als de uitslag op basis van de gemiddelden, maar merk wel op dat bij veel teams het maximum onder de 50% ligt, wat aangeeft dat ze waarschijnlijker *niet* op die positie zullen eindigen dan wel. En nu is ook duidelijk dat de middenmoot met FC Groningen, Heracles en SC Heerenveen wel erg dicht tegen elkaar aan ligt, wat verklaart waarom de twee voorgaande methodes verschillende resultaten gaven voor die clubs. 
+Zo op het eerste gezicht lijken de maxima op dezelfde te plek liggen als de uitslag op basis van de gemiddelden, maar merk wel op dat bij veel teams het maximum onder de 50% ligt, wat aangeeft dat ze waarschijnlijker *niet* op die positie zullen eindigen dan wel. En nu is ook duidelijk dat de middenmoot met FC Groningen, Heracles en SC Heerenveen wel erg dicht tegen elkaar aan ligt, wat verklaart waarom de twee voorgaande methodes verschillende resultaten gaven voor die clubs. 
 
-Nadeel van deze methode is dat het moeilijk is om de teams te rangschikken, waardoor er nu dus aardig wat discussie mogelijk is over de uitslag, zo *had* Utrecht bijvoorbeeld best nog 5e kunnen worden, en de degradatie van ADO Den Haag staat ook nog niet volledig vast. Dit zou als argument gebruikt kunnen worden dat het *terecht* was om de competitie nietig te verklaren. Toch zal het voor fans van FC Utrecht wrang blijven dat hen een reële kans op de Europa League is ontzegt.
+Nadeel van deze methode is dat het nu moeilijk is om de teams te rangschikken, waardoor er nu dus aardig wat discussie mogelijk is over de uitslag, zo *had* Utrecht bijvoorbeeld best nog 5e kunnen worden, en de degradatie van ADO Den Haag staat ook nog niet volledig vast. Dit zou als argument gebruikt kunnen worden dat het *terecht* was om de competitie nietig te verklaren. Toch zal het voor fans van FC Utrecht wrang blijven dat hen een reële kans op de Europa League is ontzegt.
 
 En dus resteert nu alsnog de vraag wat eerlijk is. Kijken we naar de meest waarschijnlijke uitslag per wedstrijd, of het verwachte aantal punten, of de kans die elk team maakte op een bepaalde positie te eindigen, of genereren we gewoon een willekeurige uitslag (als een soort loting) en baseren we alles daarop?
