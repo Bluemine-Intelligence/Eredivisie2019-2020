@@ -33,7 +33,7 @@ Lezers die niet geïntereseerd zijn in de wiskundige achtergrond kunnen ook geli
 
 [^kunstgras]: Hoe groot het verschil tussen kunstgras en natuurlijk gras ook is.
     
-[^buitenspel]: In een poging om toch wat verwarring rondom dit onderwerp weg te nemen volgt hier een elementaire definitie van buitenspel. Laat $V$ het verdedigende team zijn en $h_p(t)$ de horizontale positie van speler $p$ is op tijdstip $t$ en $b(t)$ de positie van de bal, mocht een speler $p$ op de helft van het aan team staan dan staat een speler in buitenspelpositie op tijdstip $t$ indien $$ \int \sum_{v \in V} \theta\bigl(h_v(t) - h_p(t)\bigr)  \delta\bigl(h_v(t) - x\bigr) \, \mathrm{d}x < \tfrac32 \theta\bigl(b(t) - h_p(t)\bigr) $$ Dit geldt mutatis mutandis voor de tegenpartij, tenzij er sprake is van een 'blinde scheids'.
+[^buitenspel]: In een poging om toch wat verwarring rondom dit onderwerp weg te nemen volgt hier een elementaire definitie van buitenspel. Laat $V$ het verdedigende team zijn en $h_p(t)$ de horizontale positie van speler $p$ is op tijdstip $t$ en $b(t)$ de positie van de bal, mocht een speler $p$ op de helft van het aanval team staan dan staat een speler in buitenspelpositie op tijdstip $t$ indien $$ \int \sum_{v \in V} \theta\bigl(h_v(t) - h_p(t)\bigr)  \delta\bigl(h_v(t) - x\bigr) \, \mathrm{d}x < \tfrac32 \theta\bigl(b(t) - h_p(t)\bigr) $$ Dit geldt mutatis mutandis voor de tegenpartij, tenzij er sprake is van een 'blinde scheids'.
 
 ## De Spelregels
 
@@ -145,7 +145,7 @@ pd.DataFrame(index=index, data={"Aanval" : a, "Verdediging": 1/d}).style.set_pre
 
 Wat hier met name opvalt is het enorme offensieve vermogen van Ajax, met op korte afstand AZ en PSV en daarna pas de rest. Ook interessant is dat aanval en verdediging toch vaak samen lijken te gaan, wat de theorie ondersteund dat een goede aanval de beste verdediging is. En zo op het eerste gezicht liggen FC Utrecht en Feyenoord zeer dicht tegen elkaar, wat toch tot een zeer spannende bekerfinale had moeten leiden. 
 
-Nu we de parameters van het model hebben is het vrij eenvoudig om voor de nog ongespeelde wedstrijden de meest waarschijlijke uitslag in te vullen:
+Nu we de parameters van het model hebben is het vrij eenvoudig om voor de nog ongespeelde wedstrijden de meest waarschijnlijke uitslag in te vullen:
 
 ```python
 # Bereken indices
@@ -226,9 +226,9 @@ uitslag['Doelsaldo'] = (P.Voor - P.Tegen).groupby(by=df.Thuis).sum() - (P.Voor -
 uitslag.sort_values(by=['Punten', 'Doelsaldo'], ascending=False).rename_axis(None).style.set_precision(2)
 ```
 
-We zien hier inderdaad dat Ajax en AFC toch respectievelijk gemiddeld 0.71 en 2.04 wedstrijden zouden verliezen. Waardoor zowel het verwachte aantal punten en doelsaldo voor Ajaz overtuigend hoger is. Merk ook op dat Heracles en Heerenveen nu van positie zijn verwisseld, wat aantoont dat er toch echt een wezenlijk verschil is tussen de twee methoden. In zekere zin lijkt het eerlijker om uit te gaan van gemiddelden dan 1 enkele uitslag per wedstrijd (ook al is het de meest waarschijnlijke uitslag). 
+We zien hier inderdaad dat Ajax en AFC toch respectievelijk gemiddeld 0.71 en 2.04 wedstrijden zouden verliezen. Waardoor zowel het verwachte aantal punten en doelsaldo voor Ajax overtuigend hoger is. Merk ook op dat Heracles en Heerenveen nu van positie zijn verwisseld, wat aantoont dat er toch echt een wezenlijk verschil is tussen de twee methoden. In zekere zin lijkt het eerlijker om uit te gaan van gemiddelden dan 1 enkele uitslag per wedstrijd (ook al is het de meest waarschijnlijke uitslag). 
 
-Toch is het niet helemaal terecht om op basis van de gemiddelde te concluderen wie er waarschijnlijk had gewonnen[^dice], om dat te concluderen zullen we toch echte de kans moeten uitrekenen dat Ajax had gewonnen, en een hoger gemiddelde bied geen garantie dat Ajax een grotere kans heeft om hoger te eindigen. Dit is het makkelijkst te bepalden door simpelweg de rest van de competitie te simuleren (een zogeheten monte carlo algoritme), en op basis daarvan te bepalen hoe waarschijnlijk elke positie is per team:
+Toch is het niet helemaal terecht om op basis van de gemiddelde te concluderen wie er waarschijnlijk had gewonnen[^dice], om dat te concluderen zullen we toch echte de kans moeten uitrekenen dat Ajax had gewonnen, en een hoger gemiddelde bied geen garantie dat Ajax een grotere kans heeft om hoger te eindigen. Dit is het makkelijkst te bepalen door simpelweg de rest van de competitie te simuleren (een zogeheten monte carlo algoritme), en op basis daarvan te bepalen hoe waarschijnlijk elke positie is per team:
 
 [^dice]: Denk bijvoorbeeld aan 2 dobbelstenen waarbij op de eerste de normale 1 t/m 6 staat en de tweede vijf keer een 1 heeft staan en 1 keer een 100. De tweede heeft een hoger gemiddelde maar als je ze beide rolt rolt de eerste meestal hoger.
 
