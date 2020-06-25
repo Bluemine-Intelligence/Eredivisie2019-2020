@@ -18,9 +18,7 @@ jupyter:
   make: >
     conda run jupytext --sync eredivisie2020.md
     conda run jupytext --execute eredivisie2020.md --to notbook
-    pandoc -f ipynb+footnotes+implicit_figures eredivisie2020.ipynb --katex -o ./output/eredivisie2020.html --css ./minimal.css --standalone --self-contained
-    pandoc -f ipynb+footnotes+implicit_figures eredivisie2020.ipynb --webtex=https://latex.codecogs.com/svg.latex? --css ./minimal.css --standalone --self-contained -o ./output/eredivisie2020.html
-    conda run python -m premailer -f ./output/eredivisie2020.html -o ./output/eredivisie2020_inlined_style.html
+    pandoc -f ipynb+footnotes+implicit_figures eredivisie2020.ipynb --katex -o ./docs/eredivisie2020.html --css ./minimal.css --standalone
 ---
   
 # Uitslag Eredivisie 2019/2020
