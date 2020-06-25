@@ -17,8 +17,8 @@ jupyter:
   title: Uitslag Eredivisie 2019/2020
   make: >
     conda run jupytext --sync eredivisie2020.md
-    conda run jupytext --execute eredivisie2020.md --to notbook
-    pandoc -f ipynb+footnotes+implicit_figures eredivisie2020.ipynb --katex -o ./docs/eredivisie2020.html --css ./minimal.css --standalone
+    conda run jupytext --execute eredivisie2020.md --to notebook
+    pandoc -f ipynb+footnotes+implicit_figures eredivisie2020.ipynb --katex -o ./docs/index.html --css ./minimal.css --standalone --metadata title="Eredivisie uistlag 2019/2020"
 ---
   
 # Uitslag Eredivisie 2019/2020
