@@ -1,0 +1,23 @@
+body {
+    max-width: 40em;
+    font-family: serif;
+    font-size: 14pt;
+    margin: auto;
+    text-align: justify;
+}
+
+.python .im { font-weight: bold }
+
+pre { font-size: 12pt }
+
+table {
+    white-space: nowrap;
+    border-spacing: 0pt;
+    font-size: 12pt;
+}
+thead th { text-align: center; }
+tbody th, tbody td { text-align: right }
+.index_name.level0 { text-align: right }
+th { padding: 0em    0.25em; }
+td { padding: 0.5em  0.5em; }
+tbody tr:nth-child(even) { background-color: #efefef }
