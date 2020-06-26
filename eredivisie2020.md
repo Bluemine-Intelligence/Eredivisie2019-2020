@@ -226,7 +226,7 @@ uitslag['Doelsaldo'] = (P.Voor - P.Tegen).groupby(by=df.Thuis).sum() - (P.Voor -
 uitslag.sort_values(by=['Punten', 'Doelsaldo'], ascending=False).rename_axis(None).style.set_precision(2)
 ```
 
-We zien hier inderdaad dat Ajax en AFC toch respectievelijk gemiddeld 0.71 en 2.04 wedstrijden zouden verliezen. Waardoor zowel het verwachte aantal punten en doelsaldo voor Ajax overtuigend hoger is. Merk ook op dat Heracles en Heerenveen nu van positie zijn verwisseld, wat aantoont dat er toch echt een wezenlijk verschil is tussen de twee methoden. In zekere zin lijkt het eerlijker om uit te gaan van gemiddelden dan 1 enkele uitslag per wedstrijd (ook al is het de meest waarschijnlijke uitslag). 
+We zien hier inderdaad dat Ajax en AZ toch respectievelijk gemiddeld 0.71 en 2.04 wedstrijden zouden verliezen. Waardoor zowel het verwachte aantal punten en doelsaldo voor Ajax overtuigend hoger is. Merk ook op dat Heracles en Heerenveen nu van positie zijn verwisseld, wat aantoont dat er toch echt een wezenlijk verschil is tussen de twee methoden. In zekere zin lijkt het eerlijker om uit te gaan van gemiddelden dan 1 enkele uitslag per wedstrijd (ook al is het de meest waarschijnlijke uitslag). 
 
 Toch is het ook niet helemaal terecht om op basis van de gemiddelden te concluderen dat Ajax waarschijnlijk had gewonnen, om dat te concluderen zullen we toch echt de kans moeten uitrekenen dat Ajax had gewonnen, en een hoger gemiddelde bied geen garantie dat Ajax een grotere kans heeft om hoger te eindigen[^dice]. Deze kans is het makkelijkst te bepalen door simpelweg de rest van de competitie te simuleren (een zogeheten monte carlo algoritme), en op basis daarvan te bepalen hoe waarschijnlijk elke positie is per team:
 
@@ -236,7 +236,7 @@ Toch is het ook niet helemaal terecht om op basis van de gemiddelden te conclude
 volgorde = uitslag.sort_values(by=['Punten', 'Doelsaldo'], ascending=False).index # Onthoud (logische) volgorde
 dt,du = poisson(a[i] * d[j]), poisson(d[i] * a[j]) # Kansverdeling voor aantal doelpunten
 
-# N.B. De volgende code is efficient nog snel, dus de berekening kan even duren, verlaag n voor een sneller resultaat
+# N.B. De volgende code is efficient noch snel, dus de berekening kan even duren, verlaag n voor een sneller resultaat
 n = 1000
 positie = pd.DataFrame(0, index=teams.index, columns=np.arange(1,N+1)).stack()
 for _ in range(n):
